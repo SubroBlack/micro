@@ -1,0 +1,15 @@
+# same deployment orders being exposed using ClusterIP instead of LoadBalancer
+# This would allow private cluster 
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-service-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    name: orders
+    app: micro
+  ports:
+  - name: grpc
+    port: 80
+    targetPort: 8081
