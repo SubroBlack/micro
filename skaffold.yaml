@@ -1,0 +1,29 @@
+apiVersion: skaffold/v2beta27
+kind: Config
+metadata:
+  name: micro
+build:
+  artifacts:
+  - image: gcr.io/blackbox-342109/frontend
+    context: microservices/src/frontend
+  - image: gcr.io/blackbox-342109/orders
+    context: microservices/src/orders
+  - image: gcr.io/blackbox-342109/products
+    context: microservices/src/products
+deploy:
+  kubectl:
+    manifests:
+    - microservices/src/deps/frontend.yaml
+    - microservices/src/deps/frontend-service.yaml
+    - microservices/src/deps/orders.yaml
+    - microservices/src/deps/orders-service.yaml
+    - microservices/src/deps/products.yaml
+    - microservices/src/deps/products-service.yaml
+#    - microservices/src/frontend/k8s/deployment.yml
+#    - microservices/src/frontend/k8s/service.yml
+#    - microservices/src/orders/k8s/deployment.yml
+#    - microservices/src/orders/k8s/service.yml
+#    - microservices/src/products/k8s/deployment.yml
+#    - microservices/src/products/k8s/service.yml
+    
+    
